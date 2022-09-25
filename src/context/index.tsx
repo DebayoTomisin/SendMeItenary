@@ -13,13 +13,13 @@ type Props = {
 type appContextType = {
   selectedItems: any;
   subTotalPrice: number;
+  setSelectedItems?: Dispatch<SetStateAction<any[]>>;
+  setSubTotalPrice?: Dispatch<SetStateAction<number>>;
 };
 
 const initialState = {
   selectedItems: [],
   subTotalPrice: 0,
-  setSelectedItems: Dispatch<SetStateAction<any[]>>,
-  setSubTotalPrice: Dispatch<SetStateAction<number>>,
 };
 
 const AppStateContext = createContext<appContextType>(initialState);
