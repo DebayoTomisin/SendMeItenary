@@ -37,14 +37,13 @@ const ItemList = ({ data }: any) => {
       setSelectedItems(selectedItems);
     };
     handleSelectedItemsfromCheckedState();
-  }, [checkedState]);
+  }, [checkedState, selectedItems]);
 
   useEffect(() => {
     function handleSubTotalPrice() {
       if (selectedItems.length > 0) {
         const subTotal = selectedItems.reduce(
           (acc: number, item: itemProps) => {
-            console.log(acc);
             return acc + Number(item.price);
           },
           0
@@ -54,7 +53,7 @@ const ItemList = ({ data }: any) => {
       }
     }
     handleSubTotalPrice();
-  }, [selectedItems, setSubTotalPrice]);
+  }, [selectedItems, setSubTotalPrice, checkedState]);
 
   return (
     <Box>
@@ -68,7 +67,11 @@ const ItemList = ({ data }: any) => {
             mb="8"
           >
             <Flex gap="2">
-              <Checkbox size="lg" onChange={() => handleSelectedItem(index)}>
+              <Checkbox
+                size="lg"
+                colorScheme="red"
+                onChange={() => handleSelectedItem(index)}
+              >
                 <Text fontWeight={600} color="primary.text" fontSize="md">
                   {item.name} {item.weight}
                 </Text>

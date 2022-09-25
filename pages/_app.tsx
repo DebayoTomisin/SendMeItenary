@@ -1,5 +1,4 @@
 import NextNProgress from "nextjs-progressbar";
-import { Toaster } from "react-hot-toast";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { AppProvider } from "context";
@@ -17,6 +16,9 @@ const colors = {
     red: "#F18479",
     gray1: "#8F92A1",
     gray2: "#777E96",
+    checkRed: "#FF1B03",
+    gray3: "#7C7C7C",
+    gray4: "#596273",
   },
 };
 
@@ -34,15 +36,9 @@ const theme = extendTheme({ colors, sizes });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <NextNProgress
-        startPosition={0.3}
-        color="#FF1B03"
-        height={6}
-        showOnShallow={true}
-      />
+      <NextNProgress startPosition={0.3} showOnShallow={true} />
       <AppProvider>
         <ChakraProvider theme={theme}>
-          <Toaster />
           <Box pt={8} px="4" bg="primary.two" minH="sizes.screen">
             <Component {...pageProps} />
           </Box>

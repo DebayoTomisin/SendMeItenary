@@ -12,6 +12,8 @@ import {
 import ItemList from "./ItemList";
 import { selectOptions, dataOptions } from "src/options";
 import { useAppState } from "context";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 type itemProps = {
   name: string;
@@ -28,6 +30,14 @@ const Overview = () => {
 
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState(dataOptions);
+
+  const router = useRouter();
+
+  const handleNext = () => {
+    setFormActive(true);
+    router.push("/details");
+    setFormActive(false);
+  };
 
   const handleSearch = () => {
     const filtered = dataOptions.filter((item) => {
@@ -69,11 +79,14 @@ const Overview = () => {
             isLoading={formActive}
             size="sm"
             px="8"
+            colorScheme="red"
             color="primary.white"
-            isDisabled={!btnActive}
+            isDisabled={!btnActive || formActive}
+            onClick={() => handleNext()}
           >
             Next
           </Button>
+          <Link href="/family">family</Link>
         </Flex>
 
         <Text fontWeight={700} color="primary.grey" size="lg">
