@@ -13,6 +13,7 @@ const DetailsOverview = () => {
 
   const { selectedItems, subTotalPrice }: any = useAppState();
 
+
   const deliveryFee = selectedItems.length > 0 ? 300 : 0;
 
   const displayItems = () => {

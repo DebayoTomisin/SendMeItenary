@@ -13,17 +13,8 @@ import ItemList from "./ItemList";
 import { selectOptions, dataOptions } from "src/options";
 import { useAppState } from "context";
 import { useRouter } from "next/router";
-import Link from "next/link";
-
-type itemProps = {
-  name: string;
-  price: string;
-  weight: string;
-  category: string;
-};
 
 const Overview = () => {
-  const [formActive, setFormActive] = useState(false);
   const [btnActive, setBtnActive] = useState(false);
 
   const { selectedItems }: any = useAppState();
@@ -34,9 +25,7 @@ const Overview = () => {
   const router = useRouter();
 
   const handleNext = () => {
-    setFormActive(true);
     router.push("/details");
-    setFormActive(false);
   };
 
   const handleSearch = () => {
@@ -76,17 +65,15 @@ const Overview = () => {
 
           <Button
             bg="primary.one"
-            isLoading={formActive}
             size="sm"
             px="8"
             colorScheme="red"
             color="primary.white"
-            isDisabled={!btnActive || formActive}
+            isDisabled={!btnActive}
             onClick={() => handleNext()}
           >
             Next
           </Button>
-          <Link href="/family">family</Link>
         </Flex>
 
         <Text fontWeight={700} color="primary.grey" size="lg">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Text, Flex, Box, Checkbox } from "@chakra-ui/react";
 import { useAppState } from "context";
 
@@ -27,17 +27,13 @@ const ItemList = ({ data }: any) => {
     );
 
     setCheckedState(updatedCheckedState);
-  };
 
-  useEffect(() => {
-    const handleSelectedItemsfromCheckedState = () => {
-      const selectedItems = data.filter((item: itemProps, index: number) => {
-        return checkedState[index] === true;
-      });
-      setSelectedItems(selectedItems);
-    };
-    handleSelectedItemsfromCheckedState();
-  }, [checkedState, selectedItems]);
+    const selectedItem = data.filter((item: itemProps, index: number) => {
+      return updatedCheckedState[index] === true;
+    });
+
+    setSelectedItems(selectedItem);
+  };
 
   useEffect(() => {
     function handleSubTotalPrice() {
@@ -53,7 +49,7 @@ const ItemList = ({ data }: any) => {
       }
     }
     handleSubTotalPrice();
-  }, [selectedItems, setSubTotalPrice, checkedState]);
+  }, [selectedItems, setSubTotalPrice]);
 
   return (
     <Box>
