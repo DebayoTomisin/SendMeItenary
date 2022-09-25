@@ -1,28 +1,40 @@
-import React, { useState, useContext, createContext } from "react";
+import React, {
+  useState,
+  useContext,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 type Props = {
   children?: React.ReactNode;
 };
 
-const AppStateContext = createContext(null);
+type appContextType = {
+  selectedItems: any;
+  subTotalPrice: number;
+};
 
 const initialState = {
   selectedItems: [],
   subTotalPrice: 0,
+  setSelectedItems: Dispatch<SetStateAction<any[]>>,
+  setSubTotalPrice: Dispatch<SetStateAction<number>>,
 };
 
+const AppStateContext = createContext<appContextType>(initialState);
+
 export const AppProvider = ({ children }: Props) => {
-  const [selectedItems, setSelectedItems] = useState(
+  const [selectedItems, setSelectedItems] = useState<any>(
     initialState.selectedItems
   );
-  const [subTotalPrice, setSubTotalPrice] = useState(
+  const [subTotalPrice, setSubTotalPrice] = useState<number>(
     initialState.subTotalPrice
   );
 
   return (
     <AppStateContext.Provider
       value={{
-        initialState,
         selectedItems,
         setSelectedItems,
         subTotalPrice,
